@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper Keyword Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f6f9;
+        }
+        h1, p {
+            text-align: center;
+        }
+        .box {
+            max-width: 444px;
+            margin: 25px auto;
+            padding: 25px;
+            background: pink;
+            border-radius: 12px;
+            text-align: center;
+        }
+        input[type="file"], button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 20px;
+        }
+        button {
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin: 20px;
+        }
+        .results {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <h1>Research Paper Keyword Extractor</h1>
+    <p>Upload a research paper PDF to extract its top keywords.</p>
+
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <div class="box">
+            <label for="paper">Choose Research Paper (PDF)</label>
+            <input
+                type="file"
+                name="paper"
+                id="paper"
+                accept=".pdf,application/pdf"
+                required
+            >
+            <button type="submit">Extract Keywords</button>
+        </div>
+    </form>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if keywords %}
+    <div class="results">
+        <h2>Extracted Keywords</h2>
+        <table>
+            <tr>
+                <th>Keyword</th>
+                <th>TF-IDF Score</th>
+            </tr>
+            {% for item in keywords %}
+            <tr>
+                <td>{{ item.word }}</td>
+                <td>{{ item.score }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</body>
+</html>
+```
